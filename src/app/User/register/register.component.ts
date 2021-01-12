@@ -9,7 +9,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class RegisterComponent implements OnInit {
      userSubmitted : boolean;
-     user : any = {};
+     user: any = {};
      registrationForm: FormGroup;
   constructor(private fb: FormBuilder, private serviceUser : UserServiceService) { }
 
