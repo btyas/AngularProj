@@ -1,6 +1,7 @@
 import { UserServiceService } from './../../services/user-service.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class RegisterComponent implements OnInit {
      userSubmitted : boolean;
-     user: any = {};
+     user: User;
      registrationForm: FormGroup;
   constructor(private fb: FormBuilder, private serviceUser : UserServiceService) { }
 
@@ -62,15 +63,28 @@ export class RegisterComponent implements OnInit {
    get mobile () {
      return this.registrationForm.get('mobile') as FormControl;
    }
-  // tslint:disable-next-line: typedef
+   userData(): User {
+     return this.user = {
+       userName: this.userName.value,
+       email : this.email.value,
+       password : this.password.value,
+       mobile : this.mobile.value
+     }
+   }
+
+   // tslint:disable-next-line: typedef
   onSubmit()
   {
-    this.userSubmitted = false;
     console.log(this.registrationForm.value);
-    this.user = Object.assign(this.user, this.registrationForm.value);
-    this.serviceUser.addUser(this.user);
-    this.registrationForm.reset();
     this.userSubmitted = true;
-  }
 
+
+    if(this.registrationForm.valid)
+    {
+      this.serviceUser.addUser(this.userData());
+      this.registrationForm.reset();
+      this.userSubmitted = false;
+
+     }
+  }
 }
