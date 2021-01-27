@@ -1,3 +1,4 @@
+import { AlertifyServiceService } from './services/alertify-service.service';
 import { UserServiceService } from './services/user-service.service';
 import { PropertyDetailComponent } from './property/property-detail/property-detail.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,6 +16,10 @@ import { AddPropertyComponent } from './property/add-property/add-property.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './User/login/login.component';
 import { RegisterComponent } from './User/register/register.component';
+import { AuthServiceService } from './services/auth-service.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 
 const appRoutes: Routes = [
   {  path : 'User-register',          component: RegisterComponent },
@@ -43,12 +48,18 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    BsDropdownModule.forRoot()
+
 
 
 
   ],
-  providers: [HousingService, UserServiceService],
+  providers: [HousingService,
+              UserServiceService,
+              AlertifyServiceService,
+              AuthServiceService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

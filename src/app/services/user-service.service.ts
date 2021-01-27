@@ -11,7 +11,7 @@ constructor() { }
 addUser(user: User)
   {
     let users = [];
-    if (localStorage.getItem('Users1'))
+    if (localStorage.getItem('Users'))
     {
       users = JSON.parse(localStorage.getItem('Users'));
       users = [user, ...users];

@@ -29,14 +29,20 @@
                 >Register</a>
 
               </li>
-            <li class="nav-item">
+            <li *ngIf="!loggedin()" class="nav-item">
               <a  class="nav-link"   routerLink="/User-login"
               routerLinkActive="active" >Login </a>
 
-
-
-
             </li>
+
+            <li *ngIf="loggedin()" class="nav-item">
+              <a  class="nav-link"
+                  routerLink="/User-login"
+                  routerLinkActive="active"
+                  (click)="onLogout()">Logout</a>
+           </li>
+
+
            </ul>
         </div>
       </div>
