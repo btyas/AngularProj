@@ -1,15 +1,34 @@
+import { IProperty } from './../property-list/IPropertyInterface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, RouterEvent } from '@angular/router';
+import { TabsetComponent } from 'ngx-bootstrap/tabs';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
 
 @Component({
   selector: 'app-add-property',
   templateUrl: './add-property.component.html',
   styleUrls: ['./add-property.component.scss']
 })
+
 export class AddPropertyComponent implements OnInit {
   @ViewChild('Form') addPropertyForm: NgForm;
-  SellRent = '1';
+  @ViewChild('formTabs', {static: false}) formTabs: TabsetComponent;
+
+  propertyTypes: Array<string> = ['House', 'Apartment', 'Duplex'];
+  furnishTypes: Array<string> = ['Fully', 'Semi', 'Unfurnished'];
+  bhkProperty = [1, 2 , 3, 4];
+
+  propertyView: IProperty = {
+    Id : null,
+    Name: '',
+    Price: null,
+    SellRent : null,
+    Type: null
+  };
+
   constructor(private route: Router) { }
 
   // tslint:disable-next-line: typedef
@@ -29,7 +48,10 @@ export class AddPropertyComponent implements OnInit {
   // tslint:disable-next-line: typedef
   onSubmit(form: NgForm)
   {
-    console.log('Congrats, from Submit');
-    console.log(form);
+
+  }
+    // tslint:disable-next-line: typedef
+  selectTab(tabId: number){
+    this.formTabs.tabs[tabId].active = true;
   }
 }
