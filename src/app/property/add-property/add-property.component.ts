@@ -1,4 +1,5 @@
-import { IProperty } from './../property-list/IPropertyInterface';
+import { IPropertyBase } from './../../model/IpropertyBase';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router, RouterEvent } from '@angular/router';
@@ -21,12 +22,17 @@ export class AddPropertyComponent implements OnInit {
   furnishTypes: Array<string> = ['Fully', 'Semi', 'Unfurnished'];
   bhkProperty = [1, 2 , 3, 4];
 
-  propertyView: IProperty = {
+  propertyView: IPropertyBase = {
     Id : null,
     Name: '',
     Price: null,
     SellRent : null,
-    Type: null
+    PType: null,
+    FType : null,
+    BHK: null,
+    BuildArea: null,
+    City : null,
+    RTM: null
   };
 
   constructor(private route: Router) { }
