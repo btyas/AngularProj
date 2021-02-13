@@ -24,7 +24,7 @@ export class AddPropertyComponent implements OnInit {
 
   propertyView: IPropertyBase = {
     Id : null,
-    Name: '',
+    Name: ' ',
     Price: null,
     SellRent : null,
     PType: null,
@@ -40,9 +40,7 @@ export class AddPropertyComponent implements OnInit {
   // tslint:disable-next-line: typedef
   ngOnInit() {
   //  this.addPropertyForm.controls.Name.setValue('Default Value');
-   setTimeout(() => {
-        this.addPropertyForm.controls.Name.setValue('Default Value');
-   }, 1000);
+
   }
 
   // tslint:disable-next-line: typedef
@@ -52,9 +50,11 @@ export class AddPropertyComponent implements OnInit {
   }
 
   // tslint:disable-next-line: typedef
-  onSubmit(form: NgForm)
+  onSubmit()
   {
-
+    console.log('Congrats, form Submitted');
+    console.log('SellRent=' + this.addPropertyForm.value.BasicInfo.SellRent);
+    console.log(this.addPropertyForm);
   }
     // tslint:disable-next-line: typedef
   selectTab(tabId: number){
