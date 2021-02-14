@@ -49,6 +49,7 @@ export class AddPropertyComponent implements OnInit {
     this.route.navigate(['/']);
   }
 
+
   // tslint:disable-next-line: typedef
   onSubmit()
   {
