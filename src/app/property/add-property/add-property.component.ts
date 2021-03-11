@@ -25,20 +25,20 @@ import { Property } from 'src/app/model/Property';
   addPropertyForm: FormGroup;
   nextClicked: boolean;
   property = new Property();
-
+  cityList: string[];
   // Will come from masters
-  propertyTypes: Array<string> = ['House', 'Apartment', 'Duplex']
+  propertyTypes: Array<string> = ['House', 'Apartament', 'Duplex']
   furnishTypes: Array<string> = ['Fully', 'Semi', 'Unfurnished']
 
   propertyView: IPropertyBase = {
     Id: null,
     Name: '',
     Price: null,
-    SellRent: null,
+    SellRent: 1,
     PType: null,
     FType: null,
     BHK: null,
-    BuildArea: null,
+    BuiltArea: null,
     City: null,
     RTM: null
   };
@@ -51,6 +51,10 @@ import { Property } from 'src/app/model/Property';
 
   ngOnInit() {
     this.CreateAddPropertyForm();
+    this.housingService.getAllCities().subscribe(data => {
+      this.cityList = data;
+      console.log(data);
+    })
   }
 
   CreateAddPropertyForm() {
