@@ -11,15 +11,28 @@ import { IProperty } from '../model/Iproperty';
   providedIn: 'root'
 })
 export class HousingService {
- 
+
   constructor(private http: HttpClient) {
 
-
   }
-  getAllProperties(SellRent?: number): Observable<IPropertyBase[]> {
+
+  getAllCities() : Observable<string[]> {
+    return this.http.get<string[]>('http://localhost:52137/api/City');
+  }
+
+  getProperty(id: number) {
+    return this.getAllProperties().pipe(
+      map(propertiesArray => {
+       //  throw new Error('Somme error');
+        return propertiesArray.find(p => p.Id === id);
+      })
+    );
+  }
+
+  getAllProperties(SellRent? : number): Observable<Property[]> {
     return this.http.get('data/properties.json').pipe(
       map(data => {
-      const propertiesArray: Array<IPropertyBase> = [];
+      const propertiesArray: Array<Property> = [];
       const localProperties = JSON.parse(localStorage.getItem('newProp'));
 
       if (localProperties) {

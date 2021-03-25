@@ -12,34 +12,35 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PropertyListComponent implements OnInit {
   SellRent = 1;
-  Properties: IPropertyBase[];
+  properties: IPropertyBase[];
+  Today = Date();
+  city ='';
+  SearchCity='';
+  SortParam ='';
+  constructor(private route: ActivatedRoute, private housingService: HousingService)  {
 
-  constructor(private route: ActivatedRoute, private housingService: HousingService)  { }
-
+  }
+  SortSearchClear()
+  {
+    this.SearchCity ='';
+    this.city ='';
+  }
+  SortSearch()
+  {
+    this.SearchCity = this.city;
+  }
   ngOnInit(): void {
 
    if (this.route.snapshot.url.toString()){
            this.SellRent = 2;
       }
 
-   this.housingService.getAllProperties(this.SellRent)
-          .subscribe(data => {
-            this.Properties = data;
-            const newProperty = JSON.parse(localStorage.getItem('newProp'));
-              if (newProperty.SellRent === this.SellRent) {
-                this.Properties = [newProperty, ...this.Properties];
-
-              }
-
-            console.log(data);
-            console.log(this.route.snapshot.toString());
-          },
-           error => {
-             console.log('httperror :');
-             console.log(error);
-           }
-          );
-
-  }
+      this.housingService.getAllProperties(this.SellRent).subscribe(
+        data => {
+        this.properties = data;
+        console.log(data);
+      }
+    );
+         }
 
 }

@@ -1,3 +1,5 @@
+import { SortPipe } from './Pipes/sort.pipe';
+import { FilterPipe } from './Pipes/filter.pipe';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { AlertifyServiceService } from './services/alertify-service.service';
 import { UserServiceService } from './services/user-service.service';
@@ -7,6 +9,10 @@ import { HousingService } from './services/housing.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+
+
+
+import { MatSliderModule } from '@angular/material/slider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +28,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PropertyDetailResolverService } from './property/property-detail/property-detail-resolver.service';
+
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 const appRoutes: Routes = [
   {  path : 'User-register',          component: RegisterComponent },
@@ -29,7 +38,8 @@ const appRoutes: Routes = [
   {  path: ''            ,            component: PropertyListComponent },
   {  path : 'rent-property',          component : PropertyListComponent},
   {  path: 'add-property',            component: AddPropertyComponent },
-  {  path: 'property-detail/:id',     component: PropertyDetailComponent }
+  {  path: 'property-detail/:id',     component: PropertyDetailComponent ,
+      resolve : {prp : PropertyDetailResolverService} }
 ];
 
 
@@ -42,7 +52,11 @@ const appRoutes: Routes = [
     AddPropertyComponent,
     PropertyDetailComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FilterPipe,
+    SortPipe
+
+
   ],
   imports: [
     BrowserModule,
@@ -55,7 +69,17 @@ const appRoutes: Routes = [
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     ButtonsModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgxGalleryModule,
+    MatSliderModule,
+
+
+
+
+
+
+
+
   ],
   providers: [HousingService,
               UserServiceService,
